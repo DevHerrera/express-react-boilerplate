@@ -1,7 +1,11 @@
 import express from 'express';
 import TaskRouter from './modules/tasks/tasks.route';
 import { PgDataSource } from '../db/datasource';
+import cors from 'cors';
+
 const app = express();
+
+app.use(cors());
 
 // Middleware
 app.use(express.json());
