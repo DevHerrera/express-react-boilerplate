@@ -1,6 +1,5 @@
-// components/molecules/TaskList.tsx
 import React from "react";
-import TaskItem from "./ItemList.tsx";
+import TaskItem from "./TaskItem.tsx";
 import TaskI from "../../models/tasks/task.interface.ts";
 
 interface TaskListProps {
@@ -9,7 +8,7 @@ interface TaskListProps {
 
 const TaskList = ({ tasks }: TaskListProps) => {
   return (
-    <ul>
+    <ul className="space-y-4">
       {tasks.map((task) => (
         <TaskItem task={task} />
       ))}
