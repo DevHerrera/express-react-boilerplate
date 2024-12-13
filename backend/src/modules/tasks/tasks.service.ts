@@ -13,7 +13,7 @@ export class TaskService {
   }
 
   create(task: Task) {
-    const newTask = this.taskRepository.create(task);
+    const newTask = this.taskRepository.create({ ...task, isDone: true });
     return this.taskRepository.save(newTask);
   }
 
