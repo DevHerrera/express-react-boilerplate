@@ -3,7 +3,7 @@ import { PgDataSource } from '../../../db/datasource';
 import { Task } from '../../entities/task.entity';
 import { TaskService } from './tasks.service';
 import { TaskController } from '../../controllers/tasks/tasks.controller';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { validatePayload } from '../../middlewares/validatePayload.middleware';
 import { createTaskDto } from './dto/createTask.dto';
 
