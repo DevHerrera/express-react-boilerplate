@@ -1,5 +1,6 @@
 import express from 'express';
 import TaskRouter from './modules/tasks/tasks.route';
+import ContactRouter from './modules/contacts/contacts.route';
 import { PgDataSource } from '../db/datasource';
 import cors from 'cors';
 
@@ -13,8 +14,10 @@ app.use(express.json());
 // Routes
 
 const tasksRouter = new TaskRouter().init();
+const contactRouter = new ContactRouter().init();
 
 app.use('/tasks', tasksRouter);
+app.use('/contacts', contactRouter);
 
 // Example route
 app.get('/example', async (req, res) => {
