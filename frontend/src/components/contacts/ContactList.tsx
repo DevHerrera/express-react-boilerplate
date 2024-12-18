@@ -3,7 +3,6 @@ import ContactInterface from "../../models/contacts/contact.interface.ts";
 import React from "react";
 import { AppDispatch } from "../../redux/store.ts";
 import { ContactPagination } from "./ContactPagination.tsx";
-import Notification from "../common/Notification.tsx";
 
 interface ContactListProps {
   contacts: ContactInterface[];

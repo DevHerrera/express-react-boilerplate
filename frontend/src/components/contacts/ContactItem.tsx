@@ -36,7 +36,7 @@ const ContactItem = ({ contact, dispatch }: ContactItemProps) => {
       key={contact.id}
       className="bg-white w-96  rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300"
     >
-      <div className="flex items-center space-x-5">
+      <div className="flex space-x-5">
         <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-300">
           <img
             src={photoUrl}
@@ -51,27 +51,34 @@ const ContactItem = ({ contact, dispatch }: ContactItemProps) => {
       </div>
 
       <div className="items-center flex space-x-2">
-        <MdPhone />
-        <p className="text-xl font-semibold text-gray-800 ">{contact.phone}</p>
-        <MdEmail />
-        <p className="text-xl font-semibold text-gray-800">test@test.com</p>
-
-        <button
-          onClick={() => {
-            handleEdit(contact.id);
-          }}
-        >
-          <MdEdit color="blue" />
-        </button>
-
-        <button
-          onClick={() => {
-            setModalOpen(true);
-          }}
-        >
-          <MdDelete color="red" />
-        </button>
+        <div className="flex flex-col">
+          <p className="flex flex-row items-center gap-2 text-md font-semibold text-gray-800 ">
+            <MdPhone />
+            {contact.phone}
+          </p>
+          <p className="flex flex-row items-center gap-2 text-md font-semibold text-gray-800 ">
+            <MdEmail />
+            {contact.email}
+          </p>
+        </div>
       </div>
+
+      <button
+        onClick={() => {
+          handleEdit(contact.id);
+        }}
+      >
+        <MdEdit color="blue" />
+      </button>
+
+      <button
+        onClick={() => {
+          setModalOpen(true);
+        }}
+      >
+        <MdDelete color="red" />
+      </button>
+
       <DeleteContactModal
         isOpen={isModalOpen}
         onConfirm={() => handleDelete(contact.id)}

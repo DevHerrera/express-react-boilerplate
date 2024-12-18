@@ -22,7 +22,10 @@ const schema = yup
     email: yup.string().email("Please enter a valid email").optional(),
     phone: yup
       .string()
-      .matches(/^[+-]?\d+$/, "Phone number must be 10 digits")
+      .matches(
+        /^\+?[0-9-]{10,15}$/,
+        "Phone number is invalid, must be within 10 to 15 digits"
+      )
       .required("Phone number is required"),
     photoUrl: yup.mixed().optional(),
   })
@@ -34,11 +37,9 @@ interface ContactFormProps {
 }
 
 const ContactForm: React.FC = ({ formAction, contact }: ContactFormProps) => {
-  console.log({ formAction });
-
   const navigate = useNavigate();
 
-  const handleBackToList = (customerId: number) => {
+  const handleBackToList = () => {
     navigate(`/`);
   };
 
