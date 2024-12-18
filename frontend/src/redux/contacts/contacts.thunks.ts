@@ -1,4 +1,3 @@
-// redux/contacts/contactsThunks.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   fetchContactsStart,
