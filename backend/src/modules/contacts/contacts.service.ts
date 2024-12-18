@@ -23,6 +23,9 @@ export class ContactService {
     const [data, total] = await this.contactRepository.findAndCount({
       skip: skip,
       take: pageSize,
+      order: {
+        fullName: 'ASC',
+      },
     });
 
     return {
