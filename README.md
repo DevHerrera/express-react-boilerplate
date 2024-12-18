@@ -1,6 +1,10 @@
-# Boilerplate Monolithic Project
+# Contacts App (Technical Assesment)
+This is a monorepo for a React and Express Application.
+The purpose of this app is to store contact's information such as name, phone, email and a profie photo.
 
-This repository serves as a boilerplate for building monolithic applications using React and Express. It is designed to provide a solid foundation for projects, with pre-configured tools and a task module (as example) for handling task creation.
+
+![architecture](https://github.com/user-attachments/assets/35afcc2d-e6ea-4b64-a393-90e129bc7150)
+
 
 ## Features
 
@@ -9,7 +13,8 @@ This repository serves as a boilerplate for building monolithic applications usi
 - **Tailwind CSS**: Utility-first CSS framework for styling.
 - **TypeScript**: Strongly typed JavaScript for better developer experience.
 - **ESLint & Prettier**: Configured for consistent code formatting and linting.
-
+- **Redux toolkit**: Global state management
+  
 ### Backend
 - **Express**: Minimal and flexible Node.js web framework.
 - **Joi**: Schema description and data validation.
@@ -17,9 +22,8 @@ This repository serves as a boilerplate for building monolithic applications usi
 - **Nodemon**: Automatically restarts the server during development.
 - **TypeScript**: Ensures type safety across the backend.
 - **Postgres**: SQL Database.
-
-### Additional Module
-- **Task Module**: Boilerplate module included for handling task creation.
+- **Jest**: Testing code.
+- **Imgur storage service**: Connects to a third party service to storage images
 
 ## Getting Started
 
@@ -48,9 +52,8 @@ Make sure you have the following installed:
 
 ### Running the Project
 
-1. Start the Postgres Container:
-
-2. ```bash
+1. Start the Posgres Container
+ ```bash
    cd backend
    docker-compose up -d
    ```
@@ -75,9 +78,6 @@ Make sure you have the following installed:
 ### Directory Structure
 - `backend/`: Contains the Express server and associated logic.
 - `frontend/`: Contains the React application.
-
-## Usage
-The boilerplate includes a task module in the backend to handle task creation. You can extend this module to meet your project requirements.
 
 # Screenshots
 <img width="1168" alt="Screenshot 2024-12-18 at 13 47 23" src="https://github.com/user-attachments/assets/aea2491a-07f9-43fa-b466-96abda4e07e2" />
