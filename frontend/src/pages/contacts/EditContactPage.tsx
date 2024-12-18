@@ -44,7 +44,7 @@ const EditContactPage: React.FC = () => {
         </h1>
       </div>
 
-      <ContactForm contact={contact} formAction="update" />
+      <ContactForm dispatch={dispatch} contact={contact} formAction="update" />
     </div>
   );
 };

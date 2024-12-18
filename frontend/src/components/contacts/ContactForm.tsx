@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
 import ContactInterface from "../../models/contacts/contact.interface";
 import Notification, { showNotification } from "../common/Notification.tsx";
 import { MdArrowBack } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { AppDispatch, RootState } from "../../redux/store.ts";
 
+import {
+  createContact,
+  updateContact,
+} from "../../redux/contacts/contacts.thunks.ts";
+import { useSelector } from "react-redux";
+import Spinner from "../common/Spinner.tsx";
 interface FormProps {
   fullName: string;
   email?: string;
@@ -34,9 +40,19 @@ const schema = yup
 interface ContactFormProps {
   formAction: "create" | "update";
   contact?: ContactInterface;
+  dispatch: AppDispatch;
 }
 
-const ContactForm: React.FC = ({ formAction, contact }: ContactFormProps) => {
+const ContactForm: React.FC = ({
+  formAction,
+  contact,
+  dispatch,
+}: ContactFormProps) => {
+  const { error, isLoading } = useSelector(
+    (state: RootState) => state.contacts
+  );
+
+  console.log({ isLoading });
   const navigate = useNavigate();
 
   const handleBackToList = () => {
@@ -53,8 +69,7 @@ const ContactForm: React.FC = ({ formAction, contact }: ContactFormProps) => {
     defaultValues: { fullName: contact?.fullName },
   });
 
-  // Populate form fields when `contact` changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (contact) {
       setValue("fullName", contact.fullName);
       setValue("email", contact.email || "");
@@ -75,15 +90,14 @@ const ContactForm: React.FC = ({ formAction, contact }: ContactFormProps) => {
       }
 
       if (formAction === "create") {
-        await axios.post("http://localhost:3080/contacts", formData);
+        await dispatch(createContact(formData));
+        showNotification();
       } else {
-        await axios.patch(
-          `http://localhost:3080/contacts/${contact?.id}`,
-          formData
-        );
+        if (contact) {
+          await dispatch(updateContact({ form: formData, id: contact.id }));
+        }
+        showNotification();
       }
-
-      showNotification();
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -96,6 +110,7 @@ const ContactForm: React.FC = ({ formAction, contact }: ContactFormProps) => {
 
   return (
     <div className="justify-center max-w-md mx-auto p-4 border rounded-lg shadow-lg">
+      {isLoading && <Spinner />}
       <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
@@ -196,7 +211,6 @@ const ContactForm: React.FC = ({ formAction, contact }: ContactFormProps) => {
         }
         color="blue"
       />
-      <Notification text={"Unexpected error occurred"} color="red" />
     </div>
   );
 };

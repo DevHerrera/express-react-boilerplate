@@ -22,7 +22,9 @@ const ContactList = ({
       <div className="overflow-y-auto max-h-[550px]">
         <ul className="space-y-1">
           {contacts.map((contact) => (
-            <ContactItem dispatch={dispatch} contact={contact} />
+            <div key={contact.id}>
+              <ContactItem dispatch={dispatch} contact={contact} />
+            </div>
           ))}
         </ul>
       </div>

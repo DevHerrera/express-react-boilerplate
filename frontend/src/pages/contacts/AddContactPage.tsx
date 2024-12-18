@@ -1,8 +1,11 @@
 import React from "react";
 
 import ContactForm from "../../components/contacts/ContactForm.tsx";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store.ts";
 
 const AddContactPage: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
   return (
     <div>
       <div className="flex justify-center items-center h-full">
@@ -10,8 +13,7 @@ const AddContactPage: React.FC = () => {
           Add new contact
         </h1>
       </div>
-
-      <ContactForm formAction="create" />
+      <ContactForm dispatch={dispatch} formAction="create" />
     </div>
   );
 };

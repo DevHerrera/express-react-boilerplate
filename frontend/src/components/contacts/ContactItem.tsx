@@ -37,11 +37,11 @@ const ContactItem = ({ contact, dispatch }: ContactItemProps) => {
       className="bg-white w-96  rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300"
     >
       <div className="flex space-x-5">
-        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-300">
+        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-300">
           <img
             src={photoUrl}
             alt="profilePhoto"
-            class="w-full h-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
 

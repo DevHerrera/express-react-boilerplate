@@ -17,6 +17,14 @@ const contactsSlice = createSlice({
       state.isLoading = true;
       state.error = null;
     },
+    updateContactSuccess(state) {
+      state.isLoading = false;
+      state.error = null;
+    },
+    createContactSuccess(state) {
+      state.isLoading = false;
+      state.error = null;
+    },
     fetchContactsSuccess(
       state,
       action: PayloadAction<{
@@ -44,6 +52,8 @@ export const {
   fetchContactsStart,
   fetchContactsSuccess,
   fetchContactsFailure,
+  createContactSuccess,
+  updateContactSuccess,
   setPage,
 } = contactsSlice.actions;
 
