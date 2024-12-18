@@ -18,8 +18,8 @@ const ContactList = ({
   dispatch,
 }: ContactListProps) => {
   return (
-    <div className="flex flex-col">
-      <div className="flex items-center justify-center h-screen overflow-y-auto max-h-[500px]">
+    <div className="flex flex-col items-center justify-center">
+      <div className="overflow-y-auto max-h-[550px]">
         <ul className="space-y-1">
           {contacts.map((contact) => (
             <ContactItem contact={contact} />
