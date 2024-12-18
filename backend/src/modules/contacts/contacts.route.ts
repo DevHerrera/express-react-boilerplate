@@ -7,6 +7,8 @@ import { Repository } from 'typeorm';
 import { validatePayload } from '../../middlewares/validatePayload.middleware';
 import { createContactDto } from './dto/createContact.dto';
 import { updateContactDto } from './dto/updateContact.dto';
+import ImgurService from 'src/services/storage/imgur.service';
+import multer from 'multer';
 
 export default class ContactRouter {
   public router: Router;
@@ -17,17 +19,24 @@ export default class ContactRouter {
   private createContactMiddleware = validatePayload(createContactDto);
   private updateContactMiddleware = validatePayload(updateContactDto);
 
-  constructor() {
+  constructor(
+    private storageService: ImgurService,
+    private upload: multer.Multer,
+  ) {
     this.router = Router();
     this.contactRepository = PgDataSource.getRepository(Contact);
     this.contactService = new ContactService(this.contactRepository);
-    this.contactController = new ContactsController(this.contactService);
+    this.contactController = new ContactsController(
+      this.contactService,
+      this.storageService,
+    );
   }
 
   public init() {
     this.router
-      .route('/') // host/contacts POST
+      .route('/')
       .post(
+        this.upload.single('image'),
         this.createContactMiddleware.bind(this.createContactMiddleware),
         this.contactController.create.bind(this.contactController),
       );
@@ -39,6 +48,7 @@ export default class ContactRouter {
     this.router
       .route('/:id')
       .patch(
+        this.upload.single('image'),
         this.updateContactMiddleware.bind(this.updateContactMiddleware),
         this.contactController.update.bind(this.contactController),
       );
@@ -51,14 +61,6 @@ export default class ContactRouter {
       .route('/')
       .get(this.contactController.getAll.bind(this.contactController));
 
-    //  this.router.post(
-    //    '/',
-    //    this.createTaskMiddleware.bind(this.createTaskMiddleware),
-    //    this.taskController.create.bind(this.taskController),
-    //  );
-    //  this.router
-    //    .route('/:id')
-    //    .put(this.taskController.update.bind(this.taskController));
     return this.router;
   }
 }

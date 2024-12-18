@@ -1,19 +1,27 @@
 import { Request, Response } from 'express';
 import { ContactService } from 'src/modules/contacts/contacts.service';
+import ImgurService from 'src/services/storage/imgur.service';
 
 export class ContactsController {
-  constructor(private contactService: ContactService) {}
+  constructor(
+    private contactService: ContactService,
+    private imgurService: ImgurService,
+  ) {}
+
+  private uploadContactPhoto = async (req: Request, res: Response) => {
+    if (req.file) {
+      const uploadedFileUrl = await this.imgurService.upload(req.file.buffer);
+      req.body.photoUrl = uploadedFileUrl;
+    }
+  };
 
   async getAll(req: Request, res: Response): Promise<Response> {
     try {
-      // Get `page` and `pageSize` from query parameters, with defaults
       const page = parseInt(req.query.page as string, 10) || 1;
       const pageSize = parseInt(req.query.pageSize as string, 10) || 10;
 
-      // Call the service method to fetch paginated data
       const result = await this.contactService.findAll(page, pageSize);
 
-      // Respond with paginated data
       return res.status(200).json(result);
     } catch (error) {
       console.error('Error fetching contacts:', error);
@@ -27,14 +35,23 @@ export class ContactsController {
   }
 
   async create(req: Request, res: Response) {
-    const contact = await this.contactService.create(req.body);
-    return res.status(201).json(contact);
+    try {
+      await this.uploadContactPhoto(req, res);
+      const contact = await this.contactService.create(req.body);
+      return res.status(201).json(contact);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
   }
 
   async update(req: Request, res: Response) {
     try {
-      const task = await this.contactService.update(+req.params.id, req.body);
-      return res.json(task);
+      await this.uploadContactPhoto(req, res);
+      const contact = await this.contactService.update(
+        +req.params.id,
+        req.body,
+      );
+      return res.json(contact);
     } catch (error) {
       return res.status(404).json({ message: error.message });
     }
