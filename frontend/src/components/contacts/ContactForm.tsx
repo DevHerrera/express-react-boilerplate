@@ -162,7 +162,7 @@ const ContactForm: React.FC = ({ formAction, contact }: ContactFormProps) => {
           <input
             type="file"
             id="profilePhoto"
-            accept="image/*"
+            accept="image/png, image/jpeg"
             onChange={handleFileChange}
             className="mt-1 block w-full text-sm text-gray-500"
           />

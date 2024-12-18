@@ -13,7 +13,7 @@ export const ContactPagination = ({
   totalPages,
 }: ContactPaginationProps) => {
   return (
-    <section className="flex justify-center items-center gap-4 mt-4 p-4 ">
+    <section className="flex justify-center items-center gap-4 mt-2 p-4 ">
       <div className="flex justify-center items-center gap-4 p-6 bg-slate-100 rounded">
         <button
           onClick={() =>

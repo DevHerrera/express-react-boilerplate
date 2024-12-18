@@ -13,7 +13,7 @@ export function showNotification() {
   setTimeout(() => {
     notification.classList.remove("translate-x-0", "opacity-100");
     notification.classList.add("translate-x-full", "opacity-0");
-  }, 3000);
+  }, 5000);
 }
 
 const Notification = ({ text, color }: { text: string; color: string }) => {

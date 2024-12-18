@@ -3,6 +3,7 @@ import ContactInterface from "../../models/contacts/contact.interface.ts";
 import React from "react";
 import { AppDispatch } from "../../redux/store.ts";
 import { ContactPagination } from "./ContactPagination.tsx";
+import Notification from "../common/Notification.tsx";
 
 interface ContactListProps {
   contacts: ContactInterface[];
@@ -22,7 +23,7 @@ const ContactList = ({
       <div className="overflow-y-auto max-h-[550px]">
         <ul className="space-y-1">
           {contacts.map((contact) => (
-            <ContactItem contact={contact} />
+            <ContactItem dispatch={dispatch} contact={contact} />
           ))}
         </ul>
       </div>

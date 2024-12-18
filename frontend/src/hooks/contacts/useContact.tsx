@@ -18,7 +18,6 @@ const useContacts = (): UseContactsResponse => {
       setLoading(true);
       try {
         const response = await axios.get("http://localhost:3080/contacts");
-        console.log({ response });
         setContacts(response.data.data);
       } catch (error) {
         setError(error);
