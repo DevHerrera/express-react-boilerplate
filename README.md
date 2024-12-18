@@ -79,3 +79,5 @@ Make sure you have the following installed:
 ## Usage
 The boilerplate includes a task module in the backend to handle task creation. You can extend this module to meet your project requirements.
 
+# Screenshots
+<img width="1168" alt="Screenshot 2024-12-18 at 13 47 23" src="https://github.com/user-attachments/assets/aea2491a-07f9-43fa-b466-96abda4e07e2" />
