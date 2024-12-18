@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import TaskI from "../../models/tasks/task.interface";
 import ContactInterface from "../../models/contacts/contact.interface";
 
 interface UseContactsResponse {
