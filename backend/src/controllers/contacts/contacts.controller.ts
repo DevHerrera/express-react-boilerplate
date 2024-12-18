@@ -30,8 +30,12 @@ export class ContactsController {
   }
 
   async getOne(req: Request, res: Response) {
-    const task = await this.contactService.findOne(+req.params.id);
-    return res.json(task);
+    try {
+      const contact = await this.contactService.findOne(+req.params.id);
+      return res.json(contact);
+    } catch (error) {
+      return res.status(404).json({ message: error.message });
+    }
   }
 
   async create(req: Request, res: Response) {
