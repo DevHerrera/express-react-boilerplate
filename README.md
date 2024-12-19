@@ -33,9 +33,10 @@ Make sure you have the following installed:
 - npm or yarn
 
 ### Installation
-1. Clone the repository:
+1. Clone the repository and witch to branch interview:
    ```bash
    git clone <repository_url>
+   git branch interview
    cd <repository_name>
    ```
 
