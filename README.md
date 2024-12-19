@@ -36,7 +36,7 @@ Make sure you have the following installed:
 1. Clone the repository and witch to branch interview:
    ```bash
    git clone <repository_url>
-   git branch interview
+   git checkout interview
    cd <repository_name>
    ```
 
